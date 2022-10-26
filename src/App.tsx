@@ -1,4 +1,5 @@
-import TiposBasicos from "./typescript/TiposBasicos";
+import ObjetosLiterales from "./typescript/ObjetosLiterales";
+//import TiposBasicos from "./typescript/TiposBasicos";
 
 const App = () => {
   return (
@@ -6,6 +7,7 @@ const App = () => {
       <h1>Introducción a TS - Ract</h1>
       <hr />
       {/*<TiposBasicos />*/}
+      <ObjetosLiterales />
     </div>
   );
 };
