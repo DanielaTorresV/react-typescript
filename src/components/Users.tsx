@@ -1,34 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
-import { reqResApi } from '../api/reqRes';
-import { ReqResList, User } from '../interfaces/reqResp.interface';
+import { User } from '../interfaces/reqResp.interface';
+import useUsers from '../hooks/useUsers';
 
 const Users = () => {
 
-  const [users, setUsers] = useState<User[]>([]);
-  
-  const refPage = useRef(-1);
-
-  useEffect(() => {
-    cargarUsers();
-  }, [])
-
-  const cargarUsers = async () => {
-    const resp = await reqResApi.get<ReqResList>('/users', {
-      params: {
-        page: refPage.current
-      }
-    })
-
-    console.log(refPage.current);
-    if (resp.data.data.length > 0) {
-      setUsers(resp.data.data);
-      refPage.current ++;
-    } else {
-      alert("No hay más usuarios")
-    }
-      
-  };
-
+  const { users, nextPage, previusPage} = useUsers();
   const renderItem = ({id, first_name, last_name, email, avatar}: User) => {
     return(
       <tr key={id}>
@@ -67,9 +42,16 @@ const Users = () => {
       </table>
       <button 
         className='btn btn-primary'
-        onClick={cargarUsers}
+        onClick={previusPage}
       >
-        Siguientes:
+        Previus Page
+      </button>
+      &nbsp;
+      <button 
+        className='btn btn-primary'
+        onClick={nextPage}
+      >
+        Next Page
       </button>
     </>
   );
