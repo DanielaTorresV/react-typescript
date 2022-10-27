@@ -18,8 +18,7 @@ const useUsers = () => {
           page: refPage.current
         }
       })
-  
-      console.log(refPage.current);
+      
       if (resp.data.data.length > 0) {
         setUsers(resp.data.data);
       } else {
